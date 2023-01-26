@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run with debug",
+            "type": "go",
+            "request": "attach",
+            "mode": "remote",
+            "port": 7894,
+            "host": "127.0.0.1"
+        },
+		{
+            "name": "Test with debug",
+            "type": "go",
+            "request": "attach",
+            "mode": "remote",
+            "port": 8897,
+            "host": "127.0.0.1",
+            "postDebugTask": "restart_test_container"
+		}
+    ]
+}

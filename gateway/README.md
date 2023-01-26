@@ -1,0 +1,1 @@
+# Nginx As Gateway Configuration

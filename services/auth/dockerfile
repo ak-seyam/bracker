@@ -1,0 +1,7 @@
+FROM golang:1.19.4-bullseye
+WORKDIR /app
+EXPOSE 7890 7894
+
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
+
+CMD go build -gcflags "all=-N -l" -o /app/bin/be; /go/bin/dlv --headless=true --listen=:7894 --log=true --accept-multiclient --api-version=2 exec /app/bin/be
