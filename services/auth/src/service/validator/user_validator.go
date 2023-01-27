@@ -5,16 +5,16 @@ import (
 	"net/http"
 	"regexp"
 
+	"github.com/A-Siam/bracker/auth/src/common/system_errors"
 	"github.com/A-Siam/bracker/auth/src/dto"
-	"github.com/A-Siam/bracker/auth/src/system_error"
 )
 
-func ValidateUser(user dto.CreateUserDto) system_error.LogicalError {
+func ValidateUser(user dto.CreateUserDto) *system_errors.LogicalError {
 	if len(user.Name) < 3 {
-		return system_error.NewLogicalError("username should be greater than 3", http.StatusBadRequest)
+		return system_errors.NewLogicalError("username should be greater than 3", http.StatusBadRequest)
 	}
 	if err := passwordValidation(user.Password); err != nil {
-		return system_error.NewLogicalError(err.Error(), http.StatusBadRequest)
+		return system_errors.NewLogicalError(err.Error(), http.StatusBadRequest)
 	}
 	return nil
 }

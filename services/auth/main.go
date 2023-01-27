@@ -2,16 +2,17 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"log"
+
+	"github.com/A-Siam/bracker/auth/src/api"
 )
 
-func HelloHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "Hello world")
-}
+const (
+	port = 7890
+)
 
 func main() {
-
-	http.HandleFunc("/api", HelloHandler)
-	http.ListenAndServe(":7890", nil)
-
+	app := api.InitApi()
+	log.Println("🚀", "Starting the server on port", port)
+	log.Fatal(app.Listen(fmt.Sprintf(":%d", port)))
 }

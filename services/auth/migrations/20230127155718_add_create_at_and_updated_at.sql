@@ -2,14 +2,14 @@
 -- +goose StatementBegin
 -- users
 ALTER TABLE users 
-ADD COLUMN create_at TIMESTAMP;
+ADD COLUMN created_at TIMESTAMP;
 
 ALTER TABLE users 
 ADD COLUMN updated_at TIMESTAMP;
 
 -- groups
 ALTER TABLE groups 
-ADD COLUMN create_at TIMESTAMP;
+ADD COLUMN created_at TIMESTAMP;
 
 ALTER TABLE groups 
 ADD COLUMN updated_at TIMESTAMP;

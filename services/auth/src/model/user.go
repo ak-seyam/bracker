@@ -7,3 +7,8 @@ type User struct {
 	Password  string  `gorm:"not null"`
 	Groups    []Group `gorm:"many2many:user_groups;"`
 }
+
+type UserGroup struct {
+	UserId  string `gorm:"primaryKey"`
+	GroupId string `gorm:"primaryKey"`
+}
