@@ -38,6 +38,8 @@ services:
       - ./services/auth:/app
     ports:
       - 7894:7894
+    depends_on:
+      - pgdb
     environment:
       - DB_USERNAME=admin
       - DB_PASSWORD=admin

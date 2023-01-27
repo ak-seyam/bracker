@@ -6,4 +6,6 @@ RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 RUN go install github.com/pressly/goose/v3/cmd/goose@v3.8.0
 
-CMD bash /app/scripts/run_migrations.sh; go build -gcflags "all=-N -l" -o /app/bin/be; /go/bin/dlv --headless=true --listen=:7894 --log=true --accept-multiclient --api-version=2 exec /app/bin/be
+RUN chmod +x /app/scripts/run_migrations.sh
+
+CMD /app/scripts/run_migrations.sh; go build -gcflags "all=-N -l" -o /app/bin/be; /go/bin/dlv --headless=true --listen=:7894 --log=true --accept-multiclient --api-version=2 exec /app/bin/be
