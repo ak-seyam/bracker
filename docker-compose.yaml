@@ -38,6 +38,12 @@ services:
       - ./services/auth:/app
     ports:
       - 7894:7894
+    environment:
+      - DB_USERNAME=admin
+      - DB_PASSWORD=admin
+      - DB_HOST=pgdb
+      - DB_PORT=5432
+      - DB_NAME=auth
       
   search:
     build: ./services/search

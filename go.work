@@ -1,4 +1,6 @@
 go 1.19
 
-use ./services/auth
-use ./services/search
+use (
+	./services/auth
+	./services/search
+)
