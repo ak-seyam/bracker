@@ -9,8 +9,7 @@ import (
 
 var UserRouter = routing.Router{
 	"/users": {
-		Handlers: []fiber.Handler{createUserHandler},
-		Method:   routing.Method(routing.POST),
+		Post: &[]fiber.Handler{createUserHandler},
 	},
 }
 

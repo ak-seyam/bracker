@@ -6,21 +6,24 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-type Router map[string]RouterDesc
+type Router map[string]RouterDef
 
 func RegisterRouter(app *fiber.App, router Router) {
-	for route, desc := range router {
-		switch desc.Method {
-		case Method(GET):
-			registerGET(app, route, desc.Handlers)
-		case Method(POST):
-			registerPOST(app, route, desc.Handlers)
-		case Method(PUT):
-			registerPUT(app, route, desc.Handlers)
-		case Method(PATCH):
-			registerPATCH(app, route, desc.Handlers)
-		case Method(DELETE):
-			registerDELETE(app, route, desc.Handlers)
+	for route, def := range router {
+		if def.Get != nil {
+			registerGET(app, route, *def.Get)
+		}
+		if def.Post != nil {
+			registerPOST(app, route, *def.Post)
+		}
+		if def.Put != nil {
+			registerPUT(app, route, *def.Put)
+		}
+		if def.Patch != nil {
+			registerPATCH(app, route, *def.Patch)
+		}
+		if def.Delete != nil {
+			registerDELETE(app, route, *def.Delete)
 		}
 	}
 }

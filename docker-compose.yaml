@@ -40,12 +40,17 @@ services:
       - 7894:7894
     depends_on:
       - pgdb
+      - nginx
+      - broker
+      - search_db
     environment:
       - DB_USERNAME=admin
       - DB_PASSWORD=admin
       - DB_HOST=pgdb
       - DB_PORT=5432
       - DB_NAME=auth
+      - ACCESS_TOKEN_KEY=ba6a8600a54725c32602e6018e598f2a0d1494ec
+      - REFRESH_TOKEN_KEY=ad214a567da7c1019a0a7a2350466824dbefec6b
       
   search:
     build: ./services/search

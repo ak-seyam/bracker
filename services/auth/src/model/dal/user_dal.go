@@ -1,6 +1,9 @@
 package dal
 
 import (
+	"net/http"
+
+	"github.com/A-Siam/bracker/auth/src/common/system_errors"
 	"github.com/A-Siam/bracker/auth/src/database"
 	"github.com/A-Siam/bracker/auth/src/dto"
 	"github.com/A-Siam/bracker/auth/src/model"
@@ -27,4 +30,17 @@ func SaveUser(id string, createUserDto dto.CreateUserDto) (dto.UserDto, error) {
 		return dto.UserDto{}, tx.Error
 	}
 	return dal_mappers.MapModelToUserDto(user), nil
+}
+
+func FindUserByUsername(username string) (model.User, error) {
+	db, err := database.GetDB()
+	if err != nil {
+		return model.User{}, err
+	}
+	user := model.User{}
+	tx := db.Where("username = ?", username).Find(&user)
+	if tx.Error != nil {
+		return model.User{}, system_errors.NewLogicalError(tx.Error.Error(), http.StatusBadRequest)
+	}
+	return user, nil
 }
