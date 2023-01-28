@@ -52,7 +52,7 @@ services:
       - DB_NAME=auth
       - ACCESS_TOKEN_KEY=ba6a8600a54725c32602e6018e598f2a0d1494ec
       - REFRESH_TOKEN_KEY=ad214a567da7c1019a0a7a2350466824dbefec6b
-      - BROKER_SERVERS=broker:9092
+      - BROKER_SERVERS=broker:29092
       - AUTH_TOPIC=auth_topic
       
   search:
