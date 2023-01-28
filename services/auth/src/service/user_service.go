@@ -26,7 +26,7 @@ func CreateUser(createUserDto dto.CreateUserDto) (dto.UserDto, *system_errors.Lo
 	}
 	producerErr := message.ProduceNewUserMessage(userDto)
 	if producerErr != nil {
-		loggers.WarningLogger.Println("Failed to send the message [reason:", producerErr.Error(), "]. Please consider retrying!")
+		loggers.WarningLogger.Println("Failed to send the message [ reason:", producerErr.Error(), "]. Please consider retrying!")
 	}
 	return userDto, nil
 }

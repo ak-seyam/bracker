@@ -15,7 +15,6 @@ const (
 func main() {
 	app := api.InitApi()
 	producer := message.GetProducer()
-	loggers.InitLoggers()
 	defer producer.Close()
 	loggers.InfoLogger.Println("Starting the server on port", port)
 	loggers.ErrorLogger.Fatal(app.Listen(fmt.Sprintf(":%d", port)))
