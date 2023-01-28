@@ -12,5 +12,6 @@ func InitApi() *fiber.App {
 		ErrorHandler: system_errors.SystemErrorsHandler,
 	})
 	routing.RegisterRouter(app, routers.UserRouter)
+	routing.RegisterRouter(app, routers.LoginRouter)
 	return app
 }

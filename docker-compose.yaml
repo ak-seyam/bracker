@@ -30,6 +30,8 @@ services:
     volumes:
       - ./gateway/nginx.conf:/etc/nginx/nginx.conf
       - ./gateway/api:/opt
+    depends_on:
+      - auth
 
   # apis
   auth:
@@ -40,7 +42,6 @@ services:
       - 7894:7894
     depends_on:
       - pgdb
-      - nginx
       - broker
       - search_db
     environment:

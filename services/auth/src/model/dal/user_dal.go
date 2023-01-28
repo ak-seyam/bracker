@@ -38,7 +38,7 @@ func FindUserByUsername(username string) (model.User, error) {
 		return model.User{}, err
 	}
 	user := model.User{}
-	tx := db.Where("username = ?", username).Find(&user)
+	tx := db.Where("username = ?", username).Preload("Groups").Find(&user)
 	if tx.Error != nil {
 		return model.User{}, system_errors.NewLogicalError(tx.Error.Error(), http.StatusBadRequest)
 	}

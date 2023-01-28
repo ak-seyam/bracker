@@ -45,7 +45,7 @@ func generateTokens(user model.User) (dto.UserLoginResponseDto, error) {
 	if err != nil {
 		return dto.UserLoginResponseDto{}, err
 	}
-	refreshToken, err := tokens_services.GetAccessToken(tokens_services.ConvertUserToClaims(user, 120))
+	refreshToken, err := tokens_services.GetRefreshToken(tokens_services.ConvertUserToClaims(user, 120))
 	if err != nil {
 		return dto.UserLoginResponseDto{}, err
 	}

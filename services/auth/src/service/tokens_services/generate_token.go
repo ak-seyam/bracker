@@ -49,7 +49,7 @@ func GetRefreshToken(claims Claims) (string, error) {
 
 func getToken(claims Claims, key string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(key)
+	tokenString, err := token.SignedString([]byte(key))
 	if err != nil {
 		return "", err
 	}
