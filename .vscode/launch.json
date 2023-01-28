@@ -2,11 +2,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run with debug",
+            "name": "Run Auth with debug",
             "type": "go",
             "request": "attach",
             "mode": "remote",
             "port": 7894,
+            "host": "127.0.0.1"
+        },
+        {
+            "name": "Run Search with debug",
+            "type": "go",
+            "request": "attach",
+            "mode": "remote",
+            "port": 7895,
             "host": "127.0.0.1"
         },
 		{

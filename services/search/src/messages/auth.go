@@ -23,9 +23,12 @@ func ListenOnAuthTopic(callbacks []AuthCallback, wg *sync.WaitGroup) {
 	kafkaClient.SubscribeTopics([]string{os.Getenv("AUTH_TOPIC")}, nil)
 	for {
 		msg, err := kafkaClient.ReadMessage(time.Second)
-		if !err.(kafka.Error).IsTimeout() {
+		if err != nil && !err.(kafka.Error).IsTimeout() {
 			loggers.ErrorLogger.Println("inside receiving message", err.Error())
 		} else {
+			if msg == nil {
+				continue
+			}
 			for _, cb := range callbacks {
 				okChan := make(chan bool)
 				var userDto = dto.UserDto{}
