@@ -1,8 +1,7 @@
 package routing
 
 import (
-	"log"
-
+	"github.com/A-Siam/bracker/auth/src/common/loggers"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -31,22 +30,26 @@ func RegisterRouter(app *fiber.App, router Router) {
 const prefix = "/api"
 
 func registerGET(app *fiber.App, route string, handlers []fiber.Handler) {
+	loggers.InfoLogger.Println("register GET for", prefix+route)
 	app.Get(prefix+route, handlers...)
 }
 
 func registerPOST(app *fiber.App, route string, handlers []fiber.Handler) {
-	log.Println("register post for", prefix+route)
+	loggers.InfoLogger.Println("register POST for", prefix+route)
 	app.Post(prefix+route, handlers...)
 }
 
 func registerPUT(app *fiber.App, route string, handlers []fiber.Handler) {
+	loggers.InfoLogger.Println("register PUT for", prefix+route)
 	app.Put(prefix+route, handlers...)
 }
 
 func registerPATCH(app *fiber.App, route string, handlers []fiber.Handler) {
+	loggers.InfoLogger.Println("register PATCH for", prefix+route)
 	app.Patch(prefix+route, handlers...)
 }
 
 func registerDELETE(app *fiber.App, route string, handlers []fiber.Handler) {
+	loggers.InfoLogger.Println("register DELETE for", prefix+route)
 	app.Delete(prefix+route, handlers...)
 }

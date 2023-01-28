@@ -3,8 +3,10 @@ package service
 import (
 	"net/http"
 
+	"github.com/A-Siam/bracker/auth/src/common/loggers"
 	"github.com/A-Siam/bracker/auth/src/common/system_errors"
 	"github.com/A-Siam/bracker/auth/src/dto"
+	"github.com/A-Siam/bracker/auth/src/message"
 	"github.com/A-Siam/bracker/auth/src/model"
 	"github.com/A-Siam/bracker/auth/src/model/dal"
 	"github.com/A-Siam/bracker/auth/src/service/password_services"
@@ -21,6 +23,10 @@ func CreateUser(createUserDto dto.CreateUserDto) (dto.UserDto, *system_errors.Lo
 	userDto, err := dal.SaveUser(id, createUserDto)
 	if err != nil {
 		return dto.UserDto{}, system_errors.NewLogicalError(err.Error(), http.StatusInternalServerError)
+	}
+	producerErr := message.ProduceNewUserMessage(userDto)
+	if producerErr != nil {
+		loggers.WarningLogger.Println("Failed to send the message [reason:", producerErr.Error(), "]. Please consider retrying!")
 	}
 	return userDto, nil
 }

@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/A-Siam/bracker/auth/src/api"
+	"github.com/A-Siam/bracker/auth/src/common/loggers"
+	"github.com/A-Siam/bracker/auth/src/message"
 )
 
 const (
@@ -13,6 +14,9 @@ const (
 
 func main() {
 	app := api.InitApi()
-	log.Println("🚀", "Starting the server on port", port)
-	log.Fatal(app.Listen(fmt.Sprintf(":%d", port)))
+	producer := message.GetProducer()
+	loggers.InitLoggers()
+	defer producer.Close()
+	loggers.InfoLogger.Println("Starting the server on port", port)
+	loggers.ErrorLogger.Fatal(app.Listen(fmt.Sprintf(":%d", port)))
 }
