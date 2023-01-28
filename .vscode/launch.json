@@ -25,6 +25,13 @@
             "port": 8897,
             "host": "127.0.0.1",
             "postDebugTask": "restart_test_container"
+		},
+		{
+			"name": "Launch file",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"program": "${file}"
 		}
     ]
 }

@@ -14,7 +14,9 @@ import (
 type AuthCallback func(userDto dto.UserDto, ok chan bool)
 
 func ListenOnAuthTopic(callbacks []AuthCallback, wg *sync.WaitGroup) {
-	wg.Add(1)
+	if len(callbacks) == 0 {
+		return
+	}
 	defer wg.Done()
 
 	loggers.InfoLogger.Println("start listening on auth topic")

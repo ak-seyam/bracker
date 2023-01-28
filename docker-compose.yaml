@@ -32,6 +32,7 @@ services:
       - ./gateway/api:/opt
     depends_on:
       - auth
+      - search
 
   # apis
   auth:
