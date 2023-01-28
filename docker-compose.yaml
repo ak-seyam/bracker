@@ -61,6 +61,14 @@ services:
       - ./services/search:/app
     ports:
       - 7895:7895
+    environment:
+      - ACCESS_TOKEN_KEY=ba6a8600a54725c32602e6018e598f2a0d1494ec
+      - BROKER_SERVERS=broker:29092
+      - AUTH_TOPIC=auth_topic
+      - DB_BASE_URL=http://search_db:9200
+      - DB_USERNAME=elastic
+      - DB_PASSWORD=pass
+      - MESSAGE_GROUP=search
 
   # databases
   pgdb: 
@@ -80,6 +88,8 @@ services:
     environment:
       - xpack.security.enabled=false # To simplify the developement experience
       - "discovery.type=single-node" # To simplify the developement experience
+      - ELASTIC_PASSWORD=pass
+
     volumes:
       - search_db_vol:/usr/share/elasticsearch/data
     
@@ -88,6 +98,9 @@ services:
     image: docker.elastic.co/kibana/kibana:7.11.0
     environment:
       - ELASTICSEARCH_HOSTS=http://search_db:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=pass
+
     depends_on:
       - search_db
     ports:

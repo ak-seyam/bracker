@@ -1,17 +1,15 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"sync"
+
+	"github.com/A-Siam/bracker/search/src/callbacks"
+	"github.com/A-Siam/bracker/search/src/messages"
 )
 
-func HelloHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "Hello world")
-}
-
 func main() {
-
-	http.HandleFunc("/api/auth/", HelloHandler)
-	http.ListenAndServe(":7893", nil)
-
+	var wg sync.WaitGroup
+	messages.ListenOnAuthTopic([]messages.AuthCallback{
+		callbacks.OnUserCreated,
+	}, &wg)
 }
